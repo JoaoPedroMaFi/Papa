@@ -1,0 +1,85 @@
+{% extends "layout.html" %}
+{% from 'bootstrap5/form.html' import render_form %}
+{% block title %}Adicionar Anúncio{% endblock %}
+{% block content %}
+
+<div class="container my-3">
+    <div class="p-3 text-center bg-info rounded-3 d-flex justify-content-evenly align-items-center">
+        <h1 class="icon-size"><i class="bi bi-gender-male"></i></i></h1>
+        <h1 class="icon-size"><i class="bi bi-cash-coin"></i></h1>
+        <h1 class="borel-regular text-warning mb-0 mt-3 font-size: 75px">PaPa Katsu</h1>
+        <h1 class="icon-size1"><i class="bi bi-emoji-kiss-fill"></i></h1>
+        <h1 class="icon-size1"><i class="bi bi-gender-female"></i></h1>
+    </div>
+</div>
+<section><!--info section -->
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-md-7">
+                <!-- Description -->
+
+
+                <div class="row text-center mb-3 border-bottom border-primary">
+                    <div class="col-4"><h3>Coffee Price: </h3></div>
+                    <div class="col-8"><h3>{{cafe.coffee_price}}</h3></div>
+                </div>
+                <div class="row text-center mb-3 border-bottom border-primary">
+                    <div class="col-4"><h3>Seats: </h3></div>
+                    <div class="col-8"><h3>{{cafe.seats}}</h3></div>
+                </div>
+                <div class="row text-center mb-3 border-bottom border-primary">
+                    <div class="col-4"><h3>Location: </h3></div>
+                    <div class="col-8"><h3>{{cafe.location}}</h3></div>
+                </div>
+                <div class="row text-center">
+                    <div class="map-container" style="height: 500px; width: 700px;">
+                        {{ iframe|safe }}
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right side -->
+            <div class="col-md-5">
+                <hr class="d-block d-md-none">
+                <!-- most asked questions -->
+                <div class="row text-center mb-3 border-bottom border-primary">
+                    <div class="col-7"><h3>Does it have wi-fi? </h3></div>
+                    {% if cafe.has_wifi %}
+                    <div class="col-4"><h3><i class="bi bi-hand-thumbs-up-fill text-success"></i></h3></div>
+                    {% else %}
+                     <div class="col-4"><h3><i class="bi bi-hand-thumbs-down-fill text-danger"></i></h3></div>
+                    {% endif %}
+
+                </div>
+                 <div class="row text-center mb-3 border-bottom border-primary">
+                    <div class="col-7"><h3>Does it have toilet? </h3></div>
+                    {% if cafe.has_toilet %}
+                    <div class="col-4"><h3><i class="bi bi-hand-thumbs-up-fill text-success"></i></h3></div>
+                    {% else %}
+                     <div class="col-4"><h3><i class="bi bi-hand-thumbs-down-fill text-danger"></i></h3></div>
+                    {% endif %}
+                </div>
+
+                 <div class="row text-center mb-3 border-bottom border-primary">
+                    <div class="col-7"><h3>Can you answer calls? </h3></div>
+                    {% if cafe.can_take_calls %}
+                    <div class="col-4"><h3><i class="bi bi-hand-thumbs-up-fill text-success"></i></h3></div>
+                    {% else %}
+                     <div class="col-4"><h3><i class="bi bi-hand-thumbs-down-fill text-danger"></i></h3></div>
+                    {% endif %}
+                </div>
+
+                 <div class="row text-center mb-3 border-bottom border-primary">
+                    <div class="col-7"><h3>Does it have sockets? </h3></div>
+                    {% if cafe.has_sockets %}
+                    <div class="col-4"><h3><i class="bi bi-hand-thumbs-up-fill text-success"></i></h3></div>
+                    {% else %}
+                     <div class="col-4"><h3><i class="bi bi-hand-thumbs-down-fill text-danger"></i></h3></div>
+                    {% endif %}
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

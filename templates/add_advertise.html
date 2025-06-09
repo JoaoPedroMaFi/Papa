@@ -1,0 +1,29 @@
+{% extends "layout.html" %}
+{% from 'bootstrap5/form.html' import render_form %}
+{% block title %}Adicionar Anúncio{% endblock %}
+{% block content %}
+<div class="container my-3">
+    <div class="p-3 text-center bg-info rounded-3 d-flex justify-content-evenly align-items-center">
+        <h1 class="icon-size"><i class="bi bi-cash"></i></h1>
+        <h1 class="borel-regular text-warning mb-0 mt-3 position-relative" style="font-size: 60px;">Novo Anúncio - Papa Katsu
+        <a href="{{url_for('index')}}" class="stretched-link"></a></h1>
+        <h1 class="icon-size1"><i class="bi bi-emoji-kiss"></i></h1>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row d-flex justify-content-center">
+        <div class="col-lg-8 col-md-10 col-sm-12">
+            <form action="{{url_for('new_advertise')}}" method="POST" enctype="multipart/form-data">
+                <div>
+                    {{ render_form(form, form_type='horizontal', horizontal_columns=('lg', 3, 9)) }}
+
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="row  text-center my-3">
+        <p>Obrigado por utilizar o Papa Katsu! <i class="bi bi-emoji-kiss"></i></p>
+    </div>
+</div>
+{% endblock %}

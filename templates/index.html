@@ -1,0 +1,88 @@
+{% extends "layout.html" %}
+{% block title %}Papa Katsu{% endblock %}
+{% block content %}
+
+<div class="container my-3">
+  <div class="p-3 text-center bg-info rounded-3 d-flex justify-content-evenly align-items-center position-relative">
+    <h1 class="icon-size"><i class="bi bi-gender-male"></i></h1>
+    <h1 class="icon-size"><i class="bi bi-cash-coin"></i></h1>
+    <h1 class="borel-regular text-warning mb-0 mt-3" style="font-size: 60px;">
+      PaPa Katsu Barcelos
+      <a href="{{ url_for('index') }}" class="stretched-link"></a>
+    </h1>
+    <h1 class="icon-size1"><i class="bi bi-emoji-kiss-fill"></i></h1>
+    <h1 class="icon-size1"><i class="bi bi-gender-female"></i></h1>
+  </div>
+</div>
+
+
+
+<div class="container my-4">
+    <div class="row">
+        <article class="col-md-9">
+            {% for advertise in advertises %}
+            <div class="mt-2 mb-2">
+                <div class="card shadow-sm fixed-card-height">
+                    <div class="row g-0 h-100">
+                        <div class="col-md-2 d-flex align-items-stretch">
+                            <img alt="{{ advertise.upload | safe }}"
+                                 class="rounded-start img_card w-100"
+                                 onerror='this.onerror=null; this.src="{{ url_for("static", filename="img/No_Image_Available.jpg") }}";'
+                                 src="{{ advertise.upload | safe }}">
+                        </div>
+
+                        <div class="col-md-10 d-flex align-items-stretch">
+                            <div class="card-body w-100 d-flex flex-column">
+                                <div class="row">
+                                <h5 class="col-10 card-title mb-0 texto">{{ advertise.title | safe }}</h5>
+                                <h6 class=" col-2 card-title mb-0 texto fw-bold text-danger text-end">{{ advertise.date.split()[0] | safe }}</h6>
+                                    </div>
+                                <div class="flex-grow-1">
+
+                                    <p class="card-title lh-sm mb-0 text-truncate-multiline" style="height: 60px;">{{
+                                        advertise.advertise | safe }}</p>
+
+                                    <a class="stretched-link"
+                                       href="{{url_for('advertise_ad', advertise_id=advertise.id)}}"></a>
+                                </div>
+                                 <p class="card-text mb-0 mt-auto"> <i class="bi bi-geo-alt-fill text-danger"></i> {{ advertise.location | safe }}
+    </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </article>
+        <aside class="col-md-3">
+            <div class=" my-3 align-items-center d-flex justify-content-center" style="position: relative; z-index: 2;">
+                <a class="btn btn-primary" href="{{ url_for('new_advertise') }}">Publicar Anúncio</a>
+            </div>
+            <div class="my-3 align-items-center d-flex justify-content-center">
+                <a class="btn btn-primary" href="{{ url_for('index', category='1') }}">Homens Procurando
+                    Mulheres</a>
+            </div>
+            <div class="my-3 align-items-center d-flex justify-content-center">
+                <a class="btn btn-primary" href="{{ url_for('index', category='0') }}">Mulheres
+                    Procurando Homens</a>
+            </div>
+        </aside>
+
+    </div>
+</div>
+
+
+<div class="container my-3 d-flex justify-content-evenly align-items-center">
+    {% if prev_url %}
+    <a href="{{ prev_url }}">Newer posts</a>
+    {% endif %}
+    {% if next_url %}
+    <a href="{{ next_url }}">Older posts</a>
+    {% endif %}
+</div>
+
+<div class="container my-3 d-flex justify-content-evenly align-items-center">
+    <p>Contacto: papakatsu.helper@gmail.com</p>
+</div>
+
+{% endblock %}

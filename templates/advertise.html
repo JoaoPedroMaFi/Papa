@@ -1,0 +1,95 @@
+{% extends "layout.html" %}
+{% block title %}Anúncio{% endblock %}
+{% block content %}
+
+<div class="container my-3">
+    <div class="p-3 text-center bg-info rounded-3 d-flex justify-content-evenly align-items-center">
+        <h1 class="icon-size"><i class="bi bi-gender-male"></i></i></h1>
+        <h1 class="icon-size"><i class="bi bi-cash-coin"></i></h1>
+        <a class="text-decoration-none" href="{{url_for('index')}}"><h1
+                class="borel-regular text-warning mb-0 mt-3 display-4" style="font-size: 60px;">PaPa Katsu</h1></a>
+        <h1 class="icon-size1"><i class="bi bi-emoji-kiss-fill"></i></h1>
+        <h1 class="icon-size1"><i class="bi bi-gender-female"></i></h1>
+    </div>
+</div>
+
+<section class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="mb-4">
+                <div class="content-main-title">
+                    <h2 class="font-replace">
+                        {{ advertise_ad.title }} <span class="adarea">({{ advertise_ad.city }})</span>
+                    </h2>
+                </div>
+                 <div class="row">
+                            <div class="col">
+                            <span class="fw-bold text-danger">Região:</span>
+                            <span>{{ advertise_ad.city }}</span>
+                            </div>
+                            <div class="col text-end">
+                                <span>{{ advertise_ad.views }}</span>
+                                <span class="fw-bold text-danger"> Visita/s</span>
+                            </div>
+                 </div>
+
+                <p class="mb-0">
+                    <span class="fw-bold text-danger">Local:</span>
+                    <span>{{ advertise_ad.location }}</span>
+                </p>
+                <p class="mb-0">
+                    <span class="fw-bold text-danger">Categoria:</span>
+                    {% if advertise_ad.gender == 1 %}
+                    <span>Homens Procurando Mulheres</span>
+                    {% else %}
+                    <span>Mulheres Procurando Homens</span>
+                    {% endif %}
+                </p>
+                <p class="mb-0">
+                    <span class="fw-bold text-danger">Responder para:</span>
+                    <span>{{ advertise_ad.email }}</span>
+                </p>
+                <hr>
+                <p class="mb-0">
+                    <span class="fw-bold text-danger">Publicado em:</span>
+                    <span>{{ date_obj }}</span>
+                </p>
+                <hr>
+
+            </div>
+
+            <div class="mb-4">
+                <p class="text-start" style="white-space: pre-line;word-break: break-word;" >
+                    {{ advertise_ad.advertise }}
+                </p>
+                <hr>
+            </div>
+
+            {% if advertise_ad.upload %}
+            <div class="mb-3">
+                <img alt="Imagem do Anúncio" class="img-fluid rounded" src="{{ advertise_ad.upload | safe }}">
+            </div>
+            {% endif %}
+            {% if advertise_ad.upload1 %}
+            <div class="mb-3">
+                <img alt="Imagem do Anúncio 1" class="img-fluid rounded" src="{{ advertise_ad.upload1 }}">
+            </div>
+            {% endif %}
+            {% if advertise_ad.upload2 %}
+            <div class="mb-3">
+                <img alt="Imagem do Anúncio 2" class="img-fluid rounded" src="{{ advertise_ad.upload2 }}">
+            </div>
+            {% endif %}
+            {% if advertise_ad.upload3 %}
+            <div class="mb-3">
+                <img alt="Imagem do Anúncio 3" class="img-fluid rounded" src="{{ advertise_ad.upload3 }}">
+            </div>
+            {% endif %}
+            <br>
+            <hr>
+
+        </div>
+    </div>
+</section>
+
+{% endblock %}
