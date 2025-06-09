@@ -25,8 +25,8 @@ app = Flask(__name__)
 # configure the SQLite database, relative to the app instance folder
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///advertises.db"
 app.config['SECRET_KEY'] = 'any secret string'
-app.config['RECAPTCHA_PUBLIC_KEY'] = '6LdTE1grAAAAAIVlTliyVDHSkP_H2U1a51uJsP_J'
-app.config['RECAPTCHA_PRIVATE_KEY'] = '6LdTE1grAAAAAIRUwXm39Ob1WmEdPN1HsiZV84BP'
+app.config['RECAPTCHA_PUBLIC_KEY'] = '++++'
+app.config['RECAPTCHA_PRIVATE_KEY'] = '+++++'
 app.config['RECAPTCHA_OPTIONS'] = {'theme': 'black'}
 # File size
 # app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024
