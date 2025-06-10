@@ -1,4 +1,6 @@
-
+.form-control{
+	display: inline;
+}
 .borel-regular {
   font-family: "Borel", cursive;
   font-weight: 200;
