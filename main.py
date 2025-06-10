@@ -213,7 +213,6 @@ def new_advertise():
 @app.route("/new_advertise", methods=['GET', 'POST'])
 def new_advertise():
     print("i am in")
-    locale.setlocale(locale.LC_TIME, 'pt_PT')
     now = datetime.now()
     dt_string = now.strftime("%d/%m/%Y %H:%M:%S %A")
 
