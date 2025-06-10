@@ -12,7 +12,6 @@ from wtforms.fields.simple import StringField, SubmitField, TextAreaField, FileF
 from flask_bootstrap import Bootstrap5
 from flask_wtf import FlaskForm, RecaptchaField
 from flask_uploads import UploadSet, IMAGES, configure_uploads
-import locale
 
 
 class Base(DeclarativeBase):
@@ -152,62 +151,6 @@ def advertise_ad(advertise_id):
 
     return render_template("advertise.html", advertise_ad=advertise_ad_obj, date_obj=correct_data)
 
-
-"""
-@app.route("/new_advertise", methods=['GET', 'POST'])
-def new_advertise():
-    print("i am in")
-    locale.setlocale(locale.LC_TIME, 'pt_PT')
-    now = datetime.now()
-    dt_string = now.strftime("%d/%m/%Y %H:%M:%S %A")
-    form = AdForm()
-    total = db.session.execute(func.max(Advertise.id)).scalar()
-    localfolder = str(total + 1)
-    if request.method == 'POST' and form.validate():
-        uploaded_url = None
-        if form.upload.data and form.upload.data.filename:
-            filename = images.save(form.upload.data)  # Saves the file and returns its *filename*
-            uploaded_url = url_for('static',
-                                   filename=f'uploads/{localfolder}/{filename}')  # Generates the public URL (e.g., /static/uploads/image.jpg)
-            print(f"DEBUG: Saved {filename}, Generated URL: {uploaded_url}")  # Adicione este print para depurar
-
-        uploaded1_url = None
-        if form.upload1.data and form.upload1.data.filename:
-            filename1 = images.save(form.upload1.data)
-            uploaded1_url = url_for('static', filename=f'uploads/{filename}')
-            print(f"DEBUG: Saved {filename1}, Generated URL: {uploaded1_url}")
-
-        uploaded2_url = None
-        if form.upload2.data and form.upload2.data.filename:
-            filename2 = images.save(form.upload2.data)
-            uploaded2_url = url_for('static', filename=f'uploads/{filename}')
-            print(f"DEBUG: Saved {filename2}, Generated URL: {uploaded2_url}")
-
-        uploaded3_url = None
-        if form.upload3.data and form.upload3.data.filename:
-            filename3 = images.save(form.upload3.data)
-            uploaded3_url = url_for('static', filename=f'uploads/{filename}')
-            print(f"DEBUG: Saved {filename3}, Generated URL: {uploaded3_url}")
-
-        new_ad = Advertise(
-            city=form.city.data,
-            gender=form.gender.data,
-            date=dt_string,
-            title=form.title.data,
-            location=form.location.data,
-            advertise=form.advertise.data,
-            email=form.email.data,
-            upload=uploaded_url,  # THIS IS WHAT'S STORED IN DB
-            upload1=uploaded1_url,
-            upload2=uploaded2_url,
-            upload3=uploaded3_url
-        )
-        db.session.add(new_ad)
-        db.session.commit()
-
-        return redirect(url_for('index'))
-
-    return render_template("add_advertise.html", form=form)"""
 
 
 @app.route("/new_advertise", methods=['GET', 'POST'])
