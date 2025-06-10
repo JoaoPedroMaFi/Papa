@@ -55,7 +55,7 @@ class AdForm(FlaskForm):
 
     # DESCOMENTAR e AUMENTAR o max para um valor alto como 5000 ou 10000 para permitir texto longo
     advertise = TextAreaField('Texto do Anúncio ', [validators.Length(min=6, max=5000), validators.DataRequired()],
-                              render_kw={'rows': 10})
+                              render_kw={'cols': 6, 'rows': 9})
 
     email = StringField('Email:', [validators.Length(min=6, max=350), validators.DataRequired(), validators.Email()])
 
