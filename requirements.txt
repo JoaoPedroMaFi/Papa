@@ -1,7 +1,7 @@
 Flask==3.0.3
 Flask-SQLAlchemy==3.1.1
 Flask-WTF==1.2.1
-Flask-Bootstrap5==3.3.7.1
+Bootstrap-Flask==2.5.0
 Flask-Reuploaded==1.4.0 # Or the latest stable version you prefer
 Werkzeug==3.0.3 # Usually a dependency of Flask, but good to include if you use it directly
 SQLAlchemy==2.0.29 # Usually a dependency of Flask-SQLAlchemy, but explicit is good
