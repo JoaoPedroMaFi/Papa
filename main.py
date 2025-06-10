@@ -135,7 +135,7 @@ def index():
 
 @app.route("/ad/<advertise_id>", methods=["GET"])
 def advertise_ad(advertise_id):
-    locale.setlocale(locale.LC_TIME, 'pt_PT')
+
     advertise_ad_obj = db.session.execute(
         select(Advertise).where(Advertise.id == advertise_id)
     ).scalar_one_or_none()
