@@ -14,7 +14,7 @@
 <div class="container">
     <div class="row d-flex justify-content-center">
         <div class="col-9">
-            <form action="{{url_for('new_advertise')}}" method="POST" enctype="multipart/form-data">
+            <form class="form-control border-0" action="{{url_for('new_advertise')}}" method="POST" enctype="multipart/form-data">
                 <div>
                     {{ render_form(form, form_type='horizontal') }}
 
