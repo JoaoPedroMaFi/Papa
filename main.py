@@ -20,9 +20,9 @@ class Base(DeclarativeBase):
 
 
 cloudinary.config(
-    cloud_name='ddtlmj6ua',
-    api_key='471638738434948',
-    api_secret='WtwuF7d2G-E0qfJOsDQEykmpqzY'
+    cloud_name='xx',
+    api_key='x',
+    api_secret='x-x'
 )
 
 db = SQLAlchemy()
@@ -30,7 +30,7 @@ db = SQLAlchemy()
 app = Flask(__name__)
 # configure the SQLite database, relative to the app instance folder
 app.config[
-    "SQLALCHEMY_DATABASE_URI"] = "postgresql://neondb_owner:npg_hHAK09rTpVDc@ep-solitary-fire-abvykku9-pooler.eu-west-2.aws.neon.tech/neondb?sslmode=require"
+    "SQLALCHEMY_DATABASE_URI"] = "xxx"
 app.config['SECRET_KEY'] = 'any secret string'
 app.config['RECAPTCHA_PUBLIC_KEY'] = '++++'
 app.config['RECAPTCHA_PRIVATE_KEY'] = '+++++'
