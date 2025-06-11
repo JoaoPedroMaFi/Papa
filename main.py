@@ -1,11 +1,12 @@
 import os
 from datetime import datetime
+import cloudinary.uploader
+import cloudinary
 from flask import Flask, render_template, request, url_for, redirect, session
 from flask_sqlalchemy import SQLAlchemy
 from flask_wtf.file import FileAllowed
 from sqlalchemy import select, Text, func
 from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column
-from werkzeug.utils import secure_filename
 from wtforms import validators
 from wtforms.fields.choices import RadioField
 from wtforms.fields.simple import StringField, SubmitField, TextAreaField, FileField
@@ -18,11 +19,18 @@ class Base(DeclarativeBase):
     pass
 
 
+cloudinary.config(
+    cloud_name='ddtlmj6ua',
+    api_key='471638738434948',
+    api_secret='WtwuF7d2G-E0qfJOsDQEykmpqzY'
+)
+
 db = SQLAlchemy()
 # instance of flask application
 app = Flask(__name__)
 # configure the SQLite database, relative to the app instance folder
-app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///advertises.db"
+app.config[
+    "SQLALCHEMY_DATABASE_URI"] = "postgresql://neondb_owner:npg_hHAK09rTpVDc@ep-solitary-fire-abvykku9-pooler.eu-west-2.aws.neon.tech/neondb?sslmode=require"
 app.config['SECRET_KEY'] = 'any secret string'
 app.config['RECAPTCHA_PUBLIC_KEY'] = '++++'
 app.config['RECAPTCHA_PRIVATE_KEY'] = '+++++'
@@ -49,7 +57,7 @@ class AdForm(FlaskForm):
                         validators=[validators.DataRequired()])
 
     title = StringField('Título:',
-                        [validators.Length(min=6, max=30), validators.DataRequired()])  # Aumentei o max para 100
+                        [validators.Length(min=6, max=60), validators.DataRequired()])  # Aumentei o max para 100
     location = StringField('Local:', [validators.Length(min=3, max=100), validators.DataRequired()],  # Ajustei min/max
                            description="(Cidade, Vila, Bairro) - apenas texto, não coloque números!")
 
@@ -134,7 +142,6 @@ def index():
 
 @app.route("/ad/<advertise_id>", methods=["GET"])
 def advertise_ad(advertise_id):
-
     advertise_ad_obj = db.session.execute(
         select(Advertise).where(Advertise.id == advertise_id)
     ).scalar_one_or_none()
@@ -152,7 +159,6 @@ def advertise_ad(advertise_id):
     return render_template("advertise.html", advertise_ad=advertise_ad_obj, date_obj=correct_data)
 
 
-
 @app.route("/new_advertise", methods=['GET', 'POST'])
 def new_advertise():
     print("i am in")
@@ -160,22 +166,21 @@ def new_advertise():
     dt_string = now.strftime("%d/%m/%Y %H:%M:%S %A")
 
     form = AdForm()
-    total = db.session.execute(func.max(Advertise.id)).scalar() or 0
-    localfolder = str(total + 1)
+    #total = db.session.execute(func.max(Advertise.id)).scalar() or 0
+    #localfolder = str(total + 1)
 
     # Cria a subpasta para esse anúncio
-    upload_folder = os.path.join(app.config['UPLOADED_IMAGES_DEST'], localfolder)
-    os.makedirs(upload_folder, exist_ok=True)
+    #upload_folder = os.path.join(app.config['UPLOADED_IMAGES_DEST'], localfolder)
+    #os.makedirs(upload_folder, exist_ok=True)
 
     uploaded_url = uploaded1_url = uploaded2_url = uploaded3_url = None
 
     if request.method == 'POST' and form.validate():
         def save_file(file_field):
-            if file_field.data and file_field.data.filename:
-                filename = secure_filename(file_field.data.filename)
-                file_path = os.path.join(upload_folder, filename)
-                file_field.data.save(file_path)
-                return url_for('static', filename=f'uploads/{localfolder}/{filename}')
+
+            if file_field.data:
+                result = cloudinary.uploader.upload(form.upload.data)
+                return result['secure_url']  # URL da imagem hospedada
             return None
 
         uploaded_url = save_file(form.upload)
